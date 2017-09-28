@@ -1,20 +1,33 @@
 country,gymnast,dscore,escore,deductions,competition
-BRAZIL,Thais Fidelis,6.0
-CHINA,Yan Wang,6.2
-CHINA,Tingting Liu,6.6
-ROMANIA,Catalina Ponor,6.6
+BRAZIL,Thais Fidelis,5.9,7.567,Osijek Challenge Cup
+BRAZIL,Thais Fidelis,5.9,6.950,Koper Challenge Cup
+CHINA,Yan Wang,5.8,7.8,Chinese Championships
+CHINA,Tingting Liu,6.1,8.1,0.1,Chinese National Games
+CHINA,Tingting Liu,6.6,8.7,0,Asian Championships
+CHINA,Tingting Liu,6.2,8.5,0,Asian Championships
+CHINA,Tingting Liu,6.1,8.366,Doha World Cup
+CHINA,Tingting Liu,6.0,8.766,0,Melbourne World Cup
+ROMANIA,Catalina Ponor,5.8,8.1,Doha World Cup
 ROMANIA,Catalina Ponor,5.6,8.333,Szombathely Challenge Cup
+ROMANIA,Catalina Ponor,5.6,8.233,Baku World Cup
 ROMANIA,Larisa Iordache,6.5,7.8,0.1,Paris Challenge Cup
+ROMANIA,Larisa Iordache,6.7,8.666,Romanian Championships
+ROMANIA,Larisa Iordache,6.1,7.566,Summer Universiade
+ROMANIA,Larisa Iordache,6.0,8.150,0,Koper Challenge Cup
 FRANCE,Marine Boyer,5.7,7.9,Paris Challenge Cup
-UNITED STATES,Ragan Smith,6.1/6.3
-GERMANY,Tabea Alt,6.0
-RUSSIA,Angelina Melnikova,6.0
-NETHERLANDS,Sanne Wevers,5.9,7.1,0.1,Paris Challenge Cup
-FRANCE,Melanie De Jesus Dos Santos,5.9
-JAPAN,Aiko Sugihara
-TURKEY,Tutya Yilmaz,5.8
-CANADA,Ellie Black,5.8
-UNITED STATES,Morgan Hurd,5.8
+FRANCE,Marine Boyer,6.1,8.8,0,French Championships
+FRANCE,Marine Boyer,5.8,8.3,0,City of Jesolo
+UNITED STATES,Ragan Smith,5.9,8.6,0,U.S. Championships (P&Gs)
+UNITED STATES,Ragan Smith,6.1,8.950,0,U.S. Championships (P&Gs)
+UNITED STATES,Ragan Smith,6.2,9.150,0,U.S. Classic
+RUSSIA,Angelina Melnikova,6.0,8.825,0,Russian Cup
+UNITED STATES,Morgan Hurd,5.5,8.5,0,U.S. Championships (P&Gs)
+UNITED STATES,Morgan Hurd,5.3,8.350,0,U.S. Championships (P&Gs)
+UNITED STATES,Morgan Hurd,5.5,8.150,0,U.S. Classic
 NETHERLANDS,Eythora Thorsdottir,5.8,7.267,Dutch Women's Invitational
 NETHERLANDS,Lieke Wevers,5.6,8.067,Dutch Women's Invitational
 NETHERLANDS,Sanne Wevers,6.1,6.067,Dutch Women's Invitational
+NETHERLANDS,Sanne Wevers,5.9,7.1,0.1,Paris Challenge Cup
+NETHERLANDS,Sanne Wevers,6.0,8.500,0,Melbourne World Cup
+CANADA,Ellie Black,5.8,8.333,0,Summer Universiade
+CANADA,Ellie Black,5.1,8.000,0,Koper Challenge Cup

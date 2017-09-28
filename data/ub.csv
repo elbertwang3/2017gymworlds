@@ -1,17 +1,31 @@
 country,gymnast,dscore,escore,deductions,competition
-RUSSIA,Anastasia Iliankova,6.3,
-CHINA,Huan Luo,6.2
-RUSSIA,Elena Eremina,6.1/6.4
-CHINA,Yilin Fan,6.3/6.5
+RUSSIA,Anastasia Iliankova,6.2,9.0.75,0,Russian Cup
+RUSSIA,Anastasia Iliankova,5.9,8.3,0,Osijek Challenge Cup
+CHINA,Huan Luo,6.0,7.967,0,Chinese National Games
+CHINA,Huan Luo,6.2,8.333,Chinese Championships
+CHINA,Huan Luo,6.2,8.275,Asian Championships
+CHINA,Huan Luo,6.0,8.433,Doha World Cup
+RUSSIA,Elena Eremina,6.2,8.700,0,Russian Cup
+RUSSIA,Elena Eremina,6.0,8.750,0,City of Jesolo
+CHINA,Yilin Fan,6.3,8.633,Chinese National Games
+CHINA,Yilin Fan,6.2,7.633,Chinese Championships
 BELGIUM,Nina Derwael,6.3,8.6,Paris Challenge Cup
 UKRAINE,Diana Varinska,5.9,8.15,Paris Challenge Cup
-GERMANY,Elisabeth Seitz,6.1
-GERMANY,Kim Bui,5.9/6.0
-UNITED STATES,Ashton Locklear,5.5
+UKRAINE,Diana Varinska,6.0,7.933,Baku World Cup
+GERMANY,Elisabeth Seitz,5.9,8.566,0,German Championships
+GERMANY,Kim Bui,5.8,8.366,0,German Championships
+UNITED STATES,Ashton Locklear,5.5,8.9,0,U.S. Championships (P&Gs)
+UNITED STATES,Ashton Locklear,5.5,8.8.850,0,U.S. Championships (P&Gs)
+UNITED STATES,Ashton Locklear,5.5,9.050,City of Jesolo
 SWEDEN,Jonna Adlerteg,6.2,8.0,Szombathely Challenge Cup
-AUSTRALIA,Rianna Mizzen,6.0
-ROMANIA,Larisa Iordache,6.2
-BRAZIL,Rebeca Andrade,6.1
-UNITED STATES,Ragan Smith,6.0
+ROMANIA,Larisa Iordache,6.2,8.333,0,Romanian Championships
+ROMANIA,Larisa Iordache,6.0,8.150,0,Koper Challenge Cup
+BRAZIL,Rebeca Andrade,6.1,7.95,Varna Challenge Cup
+UNITED STATES,Ragan Smith,6.0,8.3,0,U.S. Championships (P&Gs)
+UNITED STATES,Ragan Smith,5.8,8.3,0,U.S. Championships (P&Gs)
+UNITED STATES,Ragan Smith,6.0,8.550,0,U.S. Classic
 HUNGARY,Zsofia Kovacs,5.1,8.6,Szombathely Challenge Cup
+HUNGARY,Zsofia Kovacs,5.3,8.8,Hungarian Championships
+HUNGARY,Zsofia Kovacs,5.8,8.333,0,Osijek Challenge Cup
+HUNGARy,Zsofia Kovacs,5.6,7.466,0,Doha World Cup
 FRANCE,Melanie De Jesus Dos Santos,5.8,8.3,Paris Challenge Cup

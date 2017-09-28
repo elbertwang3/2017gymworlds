@@ -1,13 +1,34 @@
 country,gymnast,VT,UB,BB,FX,competition
-ROMANIA,Larisa Iordache
-RUSSIA,Elena Eremina
-UNITED STATES,Ragan Smith
-CHINA,Tingting Liu
-CHINA,Huan Luo
-CHINA,Yan Wang
-JAPAN,Mai Murakami
-RUSSIA,Angelina Melnikova
-BRAZIL,Rebeca Andrade
-UNITED STATES,Morgan Hurd
-JAPAN,Asuka Teramoto
+ROMANIA,Larisa Iordache,14.800,14.200,15.566,13.900,Romanian Championships
+ROMANIA,Larisa Iordache,14.400,14.300,14.000,14.050,Summer Universiade
+RUSSIA,Elena Eremina,12.850,14.700,14.300,14.250,Russian Cup
+RUSSIA,Elena Eremina,14.100,14.850,13.250,13.550,City of Jesolo
+UNITED STATES,Ragan Smith,14.550,15.350,U.S. Classic
+UNITED STATES,Ragan Smith,14.350,14.100,15.050,14.350,U.S. Championships (P&Gs)
+UNITED STATES,Ragan Smith,14.433,14.400,13.266,14.000,American Cup
+CHINA,Tingting Liu,14.067,13.567,14.867,13.500,Chinese National Games
+CHINA,Tingting Liu,13.700,14.350,15.300,13.450,Asian Championships
+CHINA,Huan Luo,13.500,14.200,14.533,13.100,Chinese National Games
+CHINA,Huan Luo,13.650,14.150,14.750,13.150,Asian Championships
+CHINA,Huan Luo,13.600,14.150,13.700,12.750,Chinese Championships
+CHINA,Yan Wang,14.500,13.100,14.133,13.800,Chinese National Games
+JAPAN,Mai Murakami,14.800,13.500,14.000,14.150,Japan Nationals
+JAPAN,Mai Murakami,14.700,13.400,14.050,14.000,Japan Nationals
+RUSSIA,Angelina Melnikova,14.325,14.825,14.075,14.425,Russian Cup
+RUSSIA,Angelina Melnikova,14.350,13.100,14.050,13.300,City of Jesolo
+RUSSIA,Angelina Melnikova,14.266,14.400,12.400,12.666,Stuttgart World Cup
+BRAZIL,Rebeca Andrade,15.000,13.800,13.550,13.650,City of Jesolo
+UNITED STATES,Morgan Hurd,0,0,13.650,13.850,U.S. Classic
+UNITED STATES,Morgan Hurd,14.450,13.750,13.650,13.800,U.S. Championships (P&Gs)
+UNITED STATES,Morgan Hurd,14.700,13.400,12.600,13.200,City of Jesolo
+UNITED STATES,Morgan Hurd,14.366,14.200,11.233,13.466,Stuttgart World Cup
+JAPAN,Asuka Teramoto,14.500,13.950,13.800,13.400,Summer Universiade
+JAPAN,Asuka Teramoto,13.650,13.950,13.050,12.850,Japan Nationals
+JAPAN,Asuka Teramoto,14.900,13.600,13.600,12.800,NHK Trophy
+JAPAN,Asuka Teramoto,,13.766,13.766,13.633,13.066,American Cup
 GERMANY,Tabea Alt,14.5,14.2,13.1,12.8,German Worlds Trials
+GERMANY,Tabea Alt,14.466,13.833,12.966,13.333,London World Cup
+GERMANY,Tabea Alt,14.233,12.400,14.066,13.500,Stuttgart World Cup
+GERMANY,Tabea Alt,13.900,14.350,13.550,12.700,German National Team Cup
+CANADA,Ellie Black,14.500,12.900,14.000,13.550,Summer Universiade
+CANADA,Ellie Black,14.500,12.534,13.934,13.350,Canadian Nationals

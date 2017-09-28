@@ -1,13 +1,22 @@
-country,gymnast,dscore1,escore1,dscore2,escore2,deductions,competition
-CANADA,Shallon Olsen
-BRAZIL,Rebeca Andrade
-CHINA,Yan Wang
+country,gymnast,dscore1,escore1,deductions,dscore2,escore2,deductions,competition
+CANADA,Shallon Olsen,5,4.9.0,0,5,4,8.75,0.1,Varna Challenge Cup
+CANADA,Shallon Olsen,5.4,8.950,0,5.4,9.000,0,Canadian Nationals
+CANADA,Shallon Olsen,5.4,9.250,0,5.4,8.950,0,City of Jesolo
+BRAZIL,Rebeca Andrade,5.8,9.3,0,5.2,9.3,0,Varna Challenge Cup
+BRAZIL,Rebeca Andrade,5.2,9.3,0,5.4,9.3,0,Koper Challenge Cup
+CHINA,Yan Wang,5.6,8.867,5.8,8.667,Chinese National Games
+CHINA,Yan Wang,5.6,8.4,0.1,5.8,8.8,0,Melbourne World Cup
 FRANCE,Coline Devillard,5.8,8.5,5.4,8.8,Paris Challenge Cup
-RUSSIA,Maria Paseka
-JAPAN,Sae Miyakawa
-UNITED STATES,Jade Carey
+RUSSIA,Maria Paseka,5.8,8.2,0.1,5.2,8.833,0.1,Summer Universiade
+CANADA,Brittany Rogers,5.4,9.1,0,5.2,8.8,0,Summer Universiade
+JAPAN,Sae Miyakawa,5.8,9.3,0,5.4,9.2,0,All-Japan Event Championships
+UNITED STATES,Jade Carey,5.6,9.1,5.8,8.1,U.S. Championships (P&Gs)
+UNITED STATES,Jade Carey,5.6,8.9,0.1,5.8,8.650,0.1,U.S. Championships (P&Gs)
 UZBEKISTAN,Oksana Chusovitina,4.6,8.45,4.8,8.6,Paris Challenge Cup
-CUBA,Marcia Vidiaux
-HUNGARY,Boglarka Tömböl,5.4,8.75,5.2,8.7,Paris Challenge Cup
-HUNGARY,Boglarka Tömböl,5.4,8.866,5.2,8.866,Szombathely Challenge Cup
+UZBEKISTAN,Oksana Chusovitina,5.4,8.966,0,5.2,8.866,0.1,Doha World Cup
+UZBEKISTAN,Oksana Chusovitina,5.4,8.966,0,5.2,9.1,0,Baku World Cup
+HUNGARY,Boglarka Devai,5.4,8.75,5.2,8.7,Paris Challenge Cup
+HUNGARY,Boglarka Devai,5.4,8.866,5.2,8.866,Szombathely Challenge Cup
+HUNGARY,Boglarka Devai,5.4,7.7,5.2,8.0,Hungarian Championships
+HUNGARY,Boglarka Devai,5.4,8.7,5.2,9.0,Koper Challenge Cup
 GERMANY,Tabea Alt,5.4,9.1,5.2,8.95,German Worlds Trials
