@@ -1,40 +1,44 @@
 country,gymnast,dscore,escore,deductions,competition
-RUSSIA,Anastasia Iliankova,6.2,9.0.75,0,Russian Cup
+RUSSIA,Anastasia Iliankova,6.2,9.075,0,Russian Cup
 RUSSIA,Anastasia Iliankova,5.9,8.3,0,Osijek Challenge Cup
 CHINA,Huan Luo,6.0,7.967,0,Chinese National Games
-CHINA,Huan Luo,6.2,8.333,Chinese Championships
-CHINA,Huan Luo,6.2,8.275,Asian Championships
-CHINA,Huan Luo,6.0,8.433,Doha World Cup
+CHINA,Huan Luo,6.2,8.333,0,Chinese Championships
+CHINA,Huan Luo,6.2,8.275,0,Asian Championships
+CHINA,Huan Luo,6.0,8.433,0,Doha World Cup
 CHINA,Huan Luo,6.0,7.866,0,Melbourne World Cup
 RUSSIA,Elena Eremina,6.2,8.700,0,Russian Cup
 RUSSIA,Elena Eremina,6.0,8.750,0,City of Jesolo
 RUSSIA,Elena Eremina,6.0,8.300,0,European Championships
-CHINA,Yilin Fan,6.3,8.633,Chinese National Games
-CHINA,Yilin Fan,6.2,7.633,Chinese Championships
-BELGIUM,Nina Derwael,6.3,8.6,Paris Challenge Cup
-BELGIUM,Nina Derwael,6.1,8.533,European Championships
-UKRAINE,Diana Varinska,5.9,8.15,Paris Challenge Cup
-UKRAINE,Diana Varinska,6.0,7.933,Baku World Cup
+CHINA,Yilin Fan,6.3,8.633,0,Chinese National Games
+CHINA,Yilin Fan,6.2,7.633,0,Chinese Championships
+BELGIUM,Nina Derwael,6.3,8.6,0,Paris Challenge Cup
+BELGIUM,Nina Derwael,6.1,8.533,0,European Championships
+UKRAINE,Diana Varinska,5.9,8.15,0,Paris Challenge Cup
+UKRAINE,Diana Varinska,6.0,7.933,0,Baku World Cup
 GERMANY,Elisabeth Seitz,5.9,8.566,0,German Championships
 GERMANY,Elisabeth Seitz,5.9,8.233,European Championships
 GERMANY,Kim Bui,5.8,8.366,0,German Championships
 GERMANY,Kim Bui,6.0,7.0,0,European Championships
+GERMANY,Kim Bui,5.8,8.266,0,Summer Universiade
 UNITED STATES,Ashton Locklear,5.5,8.9,0,U.S. Championships (P&Gs)
-UNITED STATES,Ashton Locklear,5.5,8.8.850,0,U.S. Championships (P&Gs)
-UNITED STATES,Ashton Locklear,5.5,9.050,City of Jesolo
-SWEDEN,Jonna Adlerteg,6.2,8.0,Szombathely Challenge Cup
+UNITED STATES,Ashton Locklear,5.5,8.850,0,U.S. Championships (P&Gs)
+UNITED STATES,Ashton Locklear,5.5,9.050,0,City of Jesolo
+SWEDEN,Jonna Adlerteg,6.2,8.0,0,Szombathely Challenge Cup
 ROMANIA,Larisa Iordache,6.2,8.333,0,Romanian Championships
 ROMANIA,Larisa Iordache,6.0,8.150,0,Koper Challenge Cup
-BRAZIL,Rebeca Andrade,6.1,7.95,Varna Challenge Cup
+ROMANIA,Larisa Iordache,5.9,7.9,0,Paris Challenge Cup
+ROMANIA,Larisa Iordache,5.5,8.3,0,Summer Universiade
+BRAZIL,Rebeca Andrade,6.1,7.95,0,Varna Challenge Cup
+BRAZIL,Rebeca Andrade,5.5,8.3,0,City of Jesolo
 UNITED STATES,Ragan Smith,6.0,8.3,0,U.S. Championships (P&Gs)
 UNITED STATES,Ragan Smith,5.8,8.3,0,U.S. Championships (P&Gs)
 UNITED STATES,Ragan Smith,6.0,8.550,0,U.S. Classic
-HUNGARY,Zsofia Kovacs,5.1,8.6,Szombathely Challenge Cup
-HUNGARY,Zsofia Kovacs,5.3,8.8,Hungarian Championships
+HUNGARY,Zsofia Kovacs,5.1,8.6,0,Szombathely Challenge Cup
+HUNGARY,Zsofia Kovacs,5.3,8.8,0,Hungarian Championships
 HUNGARY,Zsofia Kovacs,5.8,8.333,0,Osijek Challenge Cup
 HUNGARY,Zsofia Kovacs,5.6,7.466,0,Doha World Cup
 HUNGARY,Zsofia Kovacs,5.8,7.3,0,European Championships
-FRANCE,Melanie De Jesus Dos Santos,5.8,8.3,Paris Challenge Cup
-
-
-Rianna Mizzen
+AUSTRALIA,Rianna Mizzen,6.0,8.5,0,Australian Championships
+AUSTRALIA,Rianna Mizzen,5.6,7.366,0,Doha World Cup
+AUSTRALIA,Rianna Mizzen,6.0,7,600,0,Baku World Cup
+AUSTRALIA,Rianna Mizzen,6.0,7.433,0,Melbourne World Cup
