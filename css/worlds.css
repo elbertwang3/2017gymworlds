@@ -64,6 +64,7 @@ h5 {
 	margin-bottom: 20px;
 }
 
+
 .content {
  	margin-top: 30px;
 }
@@ -97,4 +98,27 @@ svg.text {
 .country {
 	stroke: black;
 	stroke-width: 0.3;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+.tooltip {
+	position: absolute;					
+    width: 200px;					
+    height: 200px;					
+    padding: 2px;				
+    font-family: 'Avenir Next';	
+    font-size: 15px;
+    font-color: black;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;		
+}
+
+
+.tooltip li {
+	text-align: left;
 }
