@@ -1,0 +1,100 @@
+svg {
+	display: block;
+	margin: auto;
+}
+
+text {
+	font-family: 'Avenir Next';
+	font-size: 14px;
+}
+
+.wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+}
+
+.head {
+	text-align:center;
+	width: 1440px;
+}
+.headline {
+	display:inline-block;
+	text-align: center;
+	margin-top: 5%;
+	width: 650px;
+
+}
+
+h1 {
+	font-family: 'Helvetica Neue';
+	font-weight: bold;
+	font-size: 40px;
+	text-align: center;
+
+}
+
+h2 {
+	font-family: 'Helvetica Neue';
+	color: grey;
+	font-size: 20px;
+	text-align: center;
+
+}
+
+h3 {
+	text-align: center;
+	font-family: 'Helvetica Neue';
+	font-weight: bold;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+h4 {
+	font-family: 'Avenir Next';
+	font-size: 14px;
+
+}
+
+
+h5 {
+	text-align: center;
+	font-family: 'Helvetica Neue';
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.content {
+ 	margin-top: 30px;
+}
+.article {
+	width: 1440px;
+	display: inline-block;
+	text-align: center;
+}
+
+.graph {
+	display: block;
+	margin-top: 30px;
+	text-align: center;
+}
+p {
+	font-family: Garamond;
+	font-size: 16px;
+	text-align: left;
+	display: inline-block;
+	padding-left: 460px;
+	padding-right: 460px;
+	margin-bottom: 20px;
+}
+
+svg.text {
+  font: 9px Avenir;
+  text-anchor: middle;
+}
+
+
+.country {
+	stroke: black;
+	stroke-width: 0.3;
+}
