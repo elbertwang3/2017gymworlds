@@ -6,11 +6,11 @@ var margin = {top: 50, left: 50, right: 50, bottom: 50},
 var countriessvg = d3.select("#countriessvg")
 
 
-/*countriessvg.append("rect")
+countriessvg.append("rect")
     .attr("class", "background")
     .attr("width", countrieswidth)
     .attr("height", countriesheight)
-    .on("click", reset)*/
+    .on("click", reset)
 
 var countriesg = countriessvg
 					.append("g")
@@ -29,7 +29,7 @@ countriessvg.append("g")
        // .attr("transform", "translate(" + (countrieswidth/6) + ", " + (3*countriesheight/4) +")");*/
 countriestip = d3.select("#countriesgraph").append("div")  
         .attr("class", "tooltip")
-        .style("left", 300 + "px")    
+        .style("left", 275 + "px")    
         .style("top", 725 + "px");	
 
 var projection = d3.geoMercator()
@@ -72,8 +72,7 @@ d3.queue()
 	.await(ready)
 
 function ready(error, countriesdata, gymnastsdata, medalsdata) {
-	console.log(countriesdata);
-	//console.log(gymnastsdata);
+
 	var countryname;
 
 	var countriesParticipatingSet = new Set();
@@ -97,11 +96,6 @@ function ready(error, countriesdata, gymnastsdata, medalsdata) {
 	for (var i = 0; i < medalsdata.length; i++) {
 		countriesMedaledSet.add(medalsdata[i].country)
 	}
-	console.log(countriesParticipatingSet);
-	console.log(countriesMedaledSet);
-	console.log(countriesGymnasts);
-
-
 	countries = topojson.feature(countriesdata, countriesdata.objects.countries1).features
 	//console.log(countries);
 
@@ -114,32 +108,24 @@ function ready(error, countriesdata, gymnastsdata, medalsdata) {
 		.attr("fill", function(d) { 
 			if (countriesParticipatingSet.has(d.properties.name)) {
 				if (countriesMedaledSet.has(d.properties.name)) {
-					console.log("PM: " + d.properties.name)
-					console.log(countriesColor("PM"));
 					return countriesColor("Participating and medaled");
 				}
 				else {
-					console.log("PNM: " + d.properties.name)
-					console.log(countriesColor("PNM"));
 					return countriesColor("Participating but no medal");
 				}
 			}
 			else {
 				if (countriesMedaledSet.has(d.properties.name)) {
-					console.log("NPM: " + d.properties.name)
-					console.log(countriesColor("Not participating but medaled"));
 					return countriesColor("NPM");
 				}
 				else {
-					console.log("NPNM: " + d.properties.name)
-					console.log(countriesColor("NPNM"));
 					return countriesColor("Not participating and no medal");
 				}
 			}
 		})
 		.on("mouseover", function(d) {
 			if (typeof countriesGymnasts[d.properties.name] !== "undefined") {	
-				console.log("getting here");
+				//console.log("getting here");
 				htmlstring = "<h5>" +  d.properties.name + "</h5> <ul>"
 				for (var i = 0; i < countriesGymnasts[d.properties.name].length; i++) {
 					htmlstring += "<li>" + countriesGymnasts[d.properties.name][i] + "</li>"
