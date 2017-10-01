@@ -242,7 +242,7 @@ var RadarChart = {
 
         polygon.enter().append(polygonType)
         .classed({area: 1, 'd3-enter': 1})
-        .on('click', function (dd){
+        .on('mouseover', function (dd){
           d3v3.event.stopPropagation();
           container.classed('focus', 1);
           d3v3.select(this).classed('focused', 1);
