@@ -1,5 +1,5 @@
 d3.csv("data/aa.csv", cast, function(data) {
-	console.log(data);
+	//console.log(data);
 
 	var maxScoreData = d3.nest()
   		.key(function(d) { return d.gymnast; })
@@ -27,7 +27,7 @@ d3.csv("data/aa.csv", cast, function(data) {
 
 
 
-  	console.log(maxScoreData);
+  	//console.log(maxScoreData);
   	var avgScoreData = d3.nest()
   		.key(function(d) { return d.gymnast; })
   		.rollup(function(v) { return {
@@ -66,7 +66,7 @@ d3.csv("data/aa.csv", cast, function(data) {
 	  	avgScoreData[i].axes[1]['yOffset'] = -5;
   	}
   	
-  	console.log(avgScoreData);
+  	//console.log(avgScoreData);
 
 
   	var radarwidth = 550,
@@ -104,6 +104,7 @@ d3.csv("data/aa.csv", cast, function(data) {
 		
 	}
 	function change(dataset) {
+		console.log("getting called");
 		mycfg = generatecfg(dataset);
 		RadarChart.draw("#allaroundgraph", dataset.slice(2,5), mycfg);
 	}

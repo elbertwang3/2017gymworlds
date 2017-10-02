@@ -80,7 +80,7 @@ var RadarChart = {
           }
           return datum;
         });
-        console.log(data);
+        //console.log(data);
         /*var maxValue = Math.max(0, d3v3.max(data, function(d) {
           return d3v3.max(d.axes, function(o){ console.log(o); return o.value; });
         }));
@@ -227,8 +227,8 @@ var RadarChart = {
         data.forEach(function(d){
           d.axes.forEach(function(axis, i) {
             //console.log(axis);
-            console.log(maxValues);
-            console.log(minValues);
+            //console.log(maxValues);
+            //console.log(minValues);
             axis.x = (cfg.w/2-radius2)+getHorizontalPosition(i, radius2, (parseFloat(Math.max(axis.value - minValues[i], 0))/maxValues[i])*cfg.factor);
             axis.y = (cfg.h/2-radius2)+getVerticalPosition(i, radius2, (parseFloat(Math.max(axis.value - minValues[i], 0))/maxValues[i])*cfg.factor);
           });
