@@ -33,7 +33,7 @@ var restoreXFlag = false; //restore order of bars back to original
 
 
 //disable sort checkbox
-d3.select("vtlabel")             
+d3.select("#vtlabel")             
   .select("#sortvt")
   .property("disabled", true)
   .property("checked", false); 
@@ -110,11 +110,10 @@ d3.csv("data/vt.csv", cast, function(data) {
   });
   //Sort totals in descending order
   maxScoreData.sort(function(a, b) { return b.total - a.total; });  
-  vtx.domain(data.map(function(d) { return d.gymnast; }));
+  vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
   vty.domain([0, d3.max(maxScoreData, function(d) { return d.total; })]);
-  console.log(vty(5));
   vtsvg.append("g")
-      .attr("class", "xaxis")
+      .attr("class", "vt x axis")
       .attr("transform", "translate(0," + vtheight + ")")
       .call(vtxAxis)
       .selectAll(".tick text")
@@ -122,7 +121,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
 
   vtsvg.append("g")
-      .attr("class", "yaxis")
+      .attr("class", "vt y axis")
       .call(vtyAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
@@ -340,7 +339,7 @@ d3.csv("data/vt.csv", cast, function(data) {
           .style("opacity", 0);
 
     //lower the bars to start on x-axis  
-    console.log(gymnast.selectAll("rect")['_groups']);
+    //console.log(gymnast.selectAll("rect")['_groups']);
     gymnast.selectAll("rect")['_groups'].forEach(function (d, i) {        
     
       //get height and y posn of base bar and selected bar
@@ -373,7 +372,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
     colName = legendClassArray_orig[sortBy];
 
-    var x0 = vtx.domain(data.sort(sortDescending
+    var x0 = vtx.domain(maxScoreData.sort(sortDescending
         ? function(a, b) { return b[colName] - a[colName]; }
         : function(a, b) { return b.total - a.total; })
         .map(function(d,i) { return d.gymnast; }))
@@ -391,7 +390,7 @@ d3.csv("data/vt.csv", cast, function(data) {
     transition.selectAll(".class" + active_link)
       .delay(delay)
       .attr("x", function(d) {      
-        return x0(d.mystate); 
+        return x0(d.mygymnast); 
       });      
 
     //sort x-labels accordingly    

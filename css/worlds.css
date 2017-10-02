@@ -3,10 +3,10 @@ svg {
 	margin: auto;
 }
 
-text {
+/*text {
 	font-family: 'Avenir Next';
 	font-size: 14px;
-}
+}*/
 
 .wrapper {
 	margin-left: auto;
@@ -133,6 +133,11 @@ svg.text {
   fill-opacity: 0.7;
 }
 
-.axis text {
+#aasvg .axis text {
 	font-size: 30px;
+}
+
+#vtsvg .axis text {
+	font-family: 'Avenir Next';
+	font-size:14px;
 }

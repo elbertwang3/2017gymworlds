@@ -77,7 +77,7 @@ d3.csv("data/aa.csv", cast, function(data) {
   							.domain([0, superscore])
   							.range(["C2CAD6", "#08306b"]);
 
-  	d3.selectAll("input")
+  	d3.selectAll(".aaradio")
 		.on("change", selectDataset);
 	
 	
