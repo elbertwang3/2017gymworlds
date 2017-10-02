@@ -1,5 +1,5 @@
 
-var vtmargin = {top: 20, right: 20, bottom: 30, left: 40},
+var vtmargin = {top: 50, right: 20, bottom: 30, left: 40},
     vtwidth = 960 - vtmargin.left - vtmargin.right,
     vtheight = 500 - vtmargin.top - vtmargin.bottom;
 
@@ -109,7 +109,12 @@ d3.csv("data/vt.csv", cast, function(data) {
 
   });
   //Sort totals in descending order
-  maxScoreData.sort(function(a, b) { return b.total - a.total; });  
+  maxScoreData.sort(function(a, b) { return b.total - a.total; }); 
+
+  var vtTip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-10, 0])
+              .html(function(d,i) { return d.name + " : " + (+round3(d.y1 - d.y0))});
   vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
   vty.domain([0, d3.max(maxScoreData, function(d) { return d.total; })]);
   vtsvg.append("g")
@@ -167,31 +172,12 @@ d3.csv("data/vt.csv", cast, function(data) {
         classLabel = d.name.replace(/\s/g, ''); //remove spaces
         return "bars class" + classLabel;
       })
-      .style("fill", function(d) { return vtcolor(d.name); });
+      .style("fill", function(d) { return vtcolor(d.name); })
+      .call(vtTip);
 
-  /*gymnast.selectAll("rect")
-       .on("mouseover", function(d){
-
-          var delta = d.y1 - d.y0;
-          var xPos = parseFloat(d3.select(this).attr("x"));
-          var yPos = parseFloat(d3.select(this).attr("y"));
-          var height = parseFloat(d3.select(this).attr("height"))
-
-          d3.select(this).attr("stroke","blue").attr("stroke-width",0.8);
-
-          svg.append("text")
-          .attr("x",xPos)
-          .attr("y",yPos +height/2)
-          .attr("class","tooltip")
-          .text(d.name +": "+ delta); 
-          
-       })
-       .on("mouseout",function(){
-          svg.select(".tooltip").remove();
-          d3.select(this).attr("stroke","pink").attr("stroke-width",0.2);
-                                
-        })*/
-
+  gymnast.selectAll("rect")
+    .on("mouseover", function(d,i) { vtTip.show(d,i,this);}).on("mouseout", function() { vtTip.hide();});
+      
 
   var vtlegend = vtsvg.selectAll(".legend")
       .data(vtcolor.domain().slice().reverse())
@@ -201,7 +187,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         legendClassArray_orig.push(d); //remove spaces
         return "legend";
       })
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      .attr("transform", function(d, i) { return "translate("+ (-330 + i*100) +",-40)"; });
 
   //reverse order to match order in which bars are stacked    
   legendClassArray = legendClassArray.reverse();
@@ -371,9 +357,23 @@ d3.csv("data/vt.csv", cast, function(data) {
     else sortDescending = false;
 
     colName = legendClassArray_orig[sortBy];
-
+    var colName2;
+    console.log(colName);
+    if (colName == "dscore1") {
+      colName2 = "escore1";
+    } else if (colName == "dscore2") {
+       colName2 = "escore2";
+    } else if (colName == "escore1") {
+      colName2 = "dscore1";
+    } else if (colName == "escore2") {
+      colName2 = "dscore2";
+    }
     var x0 = vtx.domain(maxScoreData.sort(sortDescending
-        ? function(a, b) { return b[colName] - a[colName]; }
+        ? function(a, b) { 
+          if (b[colName] - a[colName] == 0) {
+            return b[colName2] - a[colName2];
+          } else {
+          return b[colName] - a[colName]; }}
         : function(a, b) { return b.total - a.total; })
         .map(function(d,i) { return d.gymnast; }))
         .copy();
