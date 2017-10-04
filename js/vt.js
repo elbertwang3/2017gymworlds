@@ -296,7 +296,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
 
             //sort bars back to original positions if necessary
-            changevt(dataset);            
+            changevt(maxScoreData);            
 
             //y translate selected category bars back to original y posn
             restorePlot(d);
