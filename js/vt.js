@@ -28,7 +28,7 @@ var active_link = "0"; //to control legend selections and hover
 var legendClicked; //to control legend selections
 var legendClassArray = []; //store legend classes to select bars in plotSingle()
 var legendClassArray_orig = []; //orig (with spaces)
-var sortDescending; //if true, bars are sorted by height in descending order
+var sortDescending = false; //if true, bars are sorted by height in descending order
 var restoreXFlag = false; //restore order of bars back to original
 
 
@@ -61,7 +61,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         }
   		});
   
-  	console.log(maxScoreData);
+
   	var avgScoreData = d3.nest()
   		.key(function(d) { return d.gymnast; })
   		.rollup(function(v) { return {
@@ -83,12 +83,10 @@ d3.csv("data/vt.csv", cast, function(data) {
           escore2: +round3(group.value['escore2'])
         }
       });
-    console.log(avgScoreData);
 
 
   vtcolor.domain(d3.keys(data[0]).filter(function(key) { return key !== "gymnast" && key !== "country" 
                                                       && key !== "nd1" && key != "nd2" && key != "competition"; }));
-  console.log(vtcolor.domain())
   
   maxScoreData.forEach(function(d) {
     var mygymnast = d.gymnast; //add to stock code
@@ -108,14 +106,53 @@ d3.csv("data/vt.csv", cast, function(data) {
     d.total = d.scores[d.scores.length - 1].y1;    
 
   });
+
+  avgScoreData.forEach(function(d) {
+    var mygymnast = d.gymnast; //add to stock code
+    var y0 = 0;
+    //d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
+    d.scores = vtcolor.domain().map(function(name) {
+      //return { mystate:mystate, name: name, y0: y0, y1: y0 += +d[name]}; });
+      return { 
+        mygymnast:mygymnast, 
+        name: name, 
+        y0: y0, 
+        y1: y0 += +d[name], 
+        value: d[name],
+        y_corrected: 0
+      }; 
+      });
+    d.total = d.scores[d.scores.length - 1].y1;    
+
+  });
   //Sort totals in descending order
   maxScoreData.sort(function(a, b) { return b.total - a.total; }); 
-
+  avgScoreData.sort(function(a, b) { return b.total - a.total; }); 
+  console.log(maxScoreData);
+  console.log(avgScoreData);
   var vtTip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-10, 0])
               .html(function(d,i) { return d.name + " : " + (+round3(d.y1 - d.y0))});
-  vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
+
+  d3.selectAll(".vtradio")
+    .on("change", selectDataset); 
+
+  //vtchange(maxScoreData);
+  function selectDataset() {
+    var value = +this.value;
+    if (value == 0) {
+      //vtchange2(maxScoreData);
+      
+    } else {
+      //vtchange2(avgScoreData);
+    }
+  }
+
+
+  //function vtchange(dataset) {
+
+    vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
   vty.domain([0, d3.max(maxScoreData, function(d) { return d.total; })]);
   vtsvg.append("g")
       .attr("class", "vt x axis")
@@ -134,7 +171,6 @@ d3.csv("data/vt.csv", cast, function(data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end");
       //.text("Population");
-  console.log(maxScoreData);
   var gymnast = vtsvg.selectAll(".gymnast")
       .data(maxScoreData)
     .enter().append("g")
@@ -153,7 +189,6 @@ d3.csv("data/vt.csv", cast, function(data) {
         /*height_diff = height_diff + vty(d.y0) - vty(d.y1) - (vty(0) - vty(d.value));
         y_corrected = vty(d.y1) + height_diff;
         d.y_corrected = y_corrected //store in d for later use in restorePlot()
-
         if (d.name === "escore2") height_diff = 0; //reset for next d.mystate
           
         return y_corrected;    */
@@ -211,7 +246,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         }
       })
       .on("click",function(d){        
-
+        console.log("getting here2");
         if (active_link === "0") { //nothing selected, turn on this selection
           d3.select(this)           
             .style("stroke", "black")
@@ -232,9 +267,11 @@ d3.csv("data/vt.csv", cast, function(data) {
             d3.select("#vtlabel").select("#sortvt").property("disabled", false)
             d3.select("#vtlabel").style("color", "black")
             //sort the bars if checkbox is clicked            
-            d3.select("#sortvt").on("change", changevt);  
+            d3.select("#sortvt").on("change", function() {
+              changevt(maxScoreData)});  
            
         } else { //deactivate
+          console.log("getting here");
           if (active_link === this.id.split("id").pop()) {//active square selected; turn it OFF
             d3.select(this)           
               .style("stroke", "none");
@@ -259,7 +296,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
 
             //sort bars back to original positions if necessary
-            changevt();            
+            changevt(dataset);            
 
             //y translate selected category bars back to original y posn
             restorePlot(d);
@@ -271,94 +308,100 @@ d3.csv("data/vt.csv", cast, function(data) {
                           
                                 
       });
-
-  vtlegend.append("text")
-      .attr("x", vtwidth - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
-
-  // restore graph after a single selection
-  function restorePlot(d) {
-    //restore graph after a single selection
-    d3.selectAll(".bars:not(.class" + class_keep + ")")
-          .transition()
-          .duration(1000)
-          .delay(function() {
-            if (restoreXFlag) return 3000;
-            else return 750;
-          })
-          .attr("width", vtx.bandwidth()) //restore bar width
-          .style("opacity", 1);
-
-    //translate bars back up to original y-posn
-    d3.selectAll(".class" + class_keep)
-      .attr("x", function(d) { return vtx(d.mygymnast); })
-      .transition()
-      .duration(1000)
-      .delay(function () {
-        if (restoreXFlag) return 2000; //bars have to be restored to orig posn
-        else return 0;
-      })
-      .attr("y", function(d) {
-        return vty(d.y1); //not exactly correct since not based on raw data value
-        //return d.y_corrected; 
-      });
-
-    //reset
-    restoreXFlag = false;
-    
-  }
-
-  // plot only a single legend selection
-  function plotSingle(d) {
-        
-    class_keep = d.id.split("id").pop();
-    idx = legendClassArray.indexOf(class_keep);    
-       
-    //erase all but selected bars by setting opacity to 0
-    d3.selectAll(".bars:not(.class" + class_keep + ")")
-          .transition()
-          .duration(1000)
-          .attr("width", 0) // use because svg has no zindex to hide bars so can't select visible bar underneath
-          .style("opacity", 0);
-
-    //lower the bars to start on x-axis  
-    //console.log(gymnast.selectAll("rect")['_groups']);
-    gymnast.selectAll("rect")['_groups'].forEach(function (d, i) {        
-    
-      //get height and y posn of base bar and selected bar
-      h_keep = d3.select(d[idx]).attr("height");
-      y_keep = d3.select(d[idx]).attr("y");  
-
-      h_base = d3.select(d[0]).attr("height");
-      y_base = d3.select(d[0]).attr("y");    
-
-      h_shift = h_keep - h_base;
-      y_new = y_base - h_shift;
-
-      //reposition selected bars
-      d3.select(d[idx])
-        .transition()
-        .ease(d3.easeBounce)
-        .duration(1000)
-        .delay(750)
-        .attr("y", y_new);
-
-    })
    
-  }
+    vtlegend.append("text")
+        .attr("x", vtwidth - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d; });
 
-  //adapted change() fn in http://bl.ocks.org/mbostock/3885705
-  function changevt() {
+    function vtchange2(dataset) {
 
-    if (this.checked) sortDescending = true;
+    }
+    
+    // restore graph after a single selection
+    function restorePlot(d) {
+      //restore graph after a single selection
+      d3.selectAll(".bars:not(.class" + class_keep + ")")
+            .transition()
+            .duration(1000)
+            .delay(function() {
+              if (restoreXFlag) return 3000;
+              else return 750;
+            })
+            .attr("width", vtx.bandwidth()) //restore bar width
+            .style("opacity", 1);
+
+      //translate bars back up to original y-posn
+      d3.selectAll(".class" + class_keep)
+        .attr("x", function(d) { return vtx(d.mygymnast); })
+        .transition()
+        .duration(1000)
+        .delay(function () {
+          if (restoreXFlag) return 2000; //bars have to be restored to orig posn
+          else return 0;
+        })
+        .attr("y", function(d) {
+          return vty(d.y1); //not exactly correct since not based on raw data value
+          //return d.y_corrected; 
+        });
+
+      //reset
+      restoreXFlag = false;
+      
+    }
+
+    // plot only a single legend selection
+    function plotSingle(d) {
+      
+      class_keep = d.id.split("id").pop();
+      idx = legendClassArray.indexOf(class_keep);  
+      //erase all but selected bars by setting opacity to 0
+      d3.selectAll(".bars:not(.class" + class_keep + ")")
+            .transition()
+            .duration(1000)
+            .attr("width", 0) // use because svg has no zindex to hide bars so can't select visible bar underneath
+            .style("opacity", 0);
+
+      //lower the bars to start on x-axis  
+      //console.log(gymnast.selectAll("rect")['_groups']);
+      gymnast.selectAll("rect")['_groups'].forEach(function (d, i) {        
+        //console.log("getting here");
+        //get height and y posn of base bar and selected bar
+
+        h_keep = d3.select(d[idx]).attr("height");
+        y_keep = d3.select(d[idx]).attr("y");  
+
+        h_base = d3.select(d[0]).attr("height");
+        y_base = d3.select(d[0]).attr("y");    
+
+        h_shift = h_keep - h_base;
+        y_new = y_base - h_shift;
+        //console.log(y_new);
+        //reposition selected bars
+        //console.log(d[idx]);
+        d3.select(d[idx])
+          .transition()
+          .ease(d3.easeBounce)
+          .duration(1000)
+          .delay(750)
+          .attr("y", y_new);
+
+      })
+     
+    }
+
+    //adapted change() fn in http://bl.ocks.org/mbostock/3885705
+    function changevt(dataset) {
+      //console.log(dataset);
+     
+
+
+    if ($('#sortvt').is(":checked")) sortDescending = true;
     else sortDescending = false;
-
     colName = legendClassArray_orig[sortBy];
     var colName2;
-    console.log(colName);
     if (colName == "dscore1") {
       colName2 = "escore1";
     } else if (colName == "dscore2") {
@@ -368,7 +411,7 @@ d3.csv("data/vt.csv", cast, function(data) {
     } else if (colName == "escore2") {
       colName2 = "dscore2";
     }
-    var x0 = vtx.domain(maxScoreData.sort(sortDescending
+    var x0 = vtx.domain(dataset.sort(sortDescending
         ? function(a, b) { 
           if (b[colName] - a[colName] == 0) {
             return b[colName2] - a[colName2];
@@ -404,6 +447,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         .call(vtxAxis)
       .selectAll("g")
         .delay(delay);    
+  
   }
 
 });

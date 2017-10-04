@@ -104,7 +104,6 @@ d3.csv("data/aa.csv", cast, function(data) {
 		
 	}
 	function change(dataset) {
-		console.log("getting called");
 		mycfg = generatecfg(dataset);
 		RadarChart.draw("#allaroundgraph", dataset.slice(2,5), mycfg);
 	}
