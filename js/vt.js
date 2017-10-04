@@ -316,8 +316,7 @@ d3.csv("data/vt.csv", cast, function(data) {
               changevt(dataset)});  
            
         } else { //deactivate
-          d3.selectAll(".vtradio")
-  .property("disabled", false);
+  
           console.log("getting here");
           if (active_link === this.id.split("id").pop()) {//active square selected; turn it OFF
             d3.select(this)           
@@ -372,6 +371,8 @@ d3.csv("data/vt.csv", cast, function(data) {
     
     // restore graph after a single selection
     function restorePlot(d) {
+              d3.selectAll(".vtradio")
+  .property("disabled", false);
       //restore graph after a single selection
       d3.selectAll(".bars:not(.class" + class_keep + ")")
             .transition()
