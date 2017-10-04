@@ -142,10 +142,11 @@ d3.csv("data/vt.csv", cast, function(data) {
   function selectDataset() {
     var value = +this.value;
     if (value == 0) {
-      //vtchange2(maxScoreData);
+      vtchange(maxScoreData);
       
     } else {
-      //vtchange2(avgScoreData);
+      console.log("getting chosen");
+      vtchange(avgScoreData);
     }
   }
 
@@ -154,7 +155,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
     vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
   vty.domain([0, d3.max(maxScoreData, function(d) { return d.total; })]);
-  vtsvg.append("g")
+  var xaxisg = vtsvg.append("g")
       .attr("class", "vt x axis")
       .attr("transform", "translate(0," + vtheight + ")")
       .call(vtxAxis)
@@ -179,7 +180,7 @@ d3.csv("data/vt.csv", cast, function(data) {
       //.attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; })
 
    height_diff = 0;  //height discrepancy when calculating h based on data vs y(d.y0) - y(d.y1)
-   gymnast.selectAll("rect")
+   rects = gymnast.selectAll("rect")
       .data(function(d) {
         return d.scores; 
       })
@@ -228,7 +229,50 @@ d3.csv("data/vt.csv", cast, function(data) {
   legendClassArray = legendClassArray.reverse();
   legendClassArray_orig = legendClassArray_orig.reverse();
 
-  vtlegend.append("rect")
+  vtchange(maxScoreData);
+   
+    function vtchange(dataset) {
+      var transition = vtsvg.transition().duration(750),
+        delay = function(d, i) { return i * 20; };
+      console.log(dataset);
+      console.log(gymnast);
+      console.log(rects);
+       vtx.domain(dataset.map(function(d) { return d.gymnast; })); //might have to initialize this first
+       transition.select(".x.axis")
+        .call(vtxAxis)
+        .selectAll("g")
+        .delay(delay);
+       gymnast.data(dataset);
+        rects.data(function(d) {
+        return d.scores; 
+
+      }).attr("width", vtx.bandwidth()).transition()
+          .duration(1000)
+      .attr("y", function(d) {
+        /*height_diff = height_diff + vty(d.y0) - vty(d.y1) - (vty(0) - vty(d.value));
+        y_corrected = vty(d.y1) + height_diff;
+        d.y_corrected = y_corrected //store in d for later use in restorePlot()
+        if (d.name === "escore2") height_diff = 0; //reset for next d.mystate
+          
+        return y_corrected;    */
+        return vty(d.y1);  //orig, but not accurate  
+      })
+      .attr("x",function(d) { //add to stock code
+          return vtx(d.mygymnast)
+        })
+      .attr("height", function(d) {       
+        return vty(d.y0) - vty(d.y1); //heights calculated based on stacked values (inaccurate)
+       //console.log(vty.domain())
+        //console.log(vty(9));
+        //return vty(0) - vty(d.value); //calculate height directly from value in csv file
+      })
+      .attr("class", function(d) {        
+        classLabel = d.name.replace(/\s/g, ''); //remove spaces
+        return "bars class" + classLabel;
+      })
+      .style("fill", function(d) { return vtcolor(d.name); })
+      .call(vtTip);
+        vtlegend.append("rect")
       .attr("x", vtwidth - 18)
       .attr("width", 18)
       .attr("height", 18)
@@ -246,8 +290,9 @@ d3.csv("data/vt.csv", cast, function(data) {
         }
       })
       .on("click",function(d){        
-        console.log("getting here2");
         if (active_link === "0") { //nothing selected, turn on this selection
+          d3.selectAll(".vtradio")
+  .property("disabled", true);
           d3.select(this)           
             .style("stroke", "black")
             .style("stroke-width", 2);
@@ -268,9 +313,11 @@ d3.csv("data/vt.csv", cast, function(data) {
             d3.select("#vtlabel").style("color", "black")
             //sort the bars if checkbox is clicked            
             d3.select("#sortvt").on("change", function() {
-              changevt(maxScoreData)});  
+              changevt(dataset)});  
            
         } else { //deactivate
+          d3.selectAll(".vtradio")
+  .property("disabled", false);
           console.log("getting here");
           if (active_link === this.id.split("id").pop()) {//active square selected; turn it OFF
             d3.select(this)           
@@ -296,7 +343,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
 
             //sort bars back to original positions if necessary
-            changevt(maxScoreData);            
+            changevt(dataset);            
 
             //y translate selected category bars back to original y posn
             restorePlot(d);
@@ -308,7 +355,8 @@ d3.csv("data/vt.csv", cast, function(data) {
                           
                                 
       });
-   
+
+    }
     vtlegend.append("text")
         .attr("x", vtwidth - 24)
         .attr("y", 9)
@@ -316,9 +364,11 @@ d3.csv("data/vt.csv", cast, function(data) {
         .style("text-anchor", "end")
         .text(function(d) { return d; });
 
-    function vtchange2(dataset) {
+    /*rects.transition().duration(500).attr("width", function(d) {
+        return width - vtx(this.parentNode.__data__.enrols);
+    });*/
 
-    }
+    
     
     // restore graph after a single selection
     function restorePlot(d) {
@@ -437,10 +487,7 @@ d3.csv("data/vt.csv", cast, function(data) {
       });      
 
     //sort x-labels accordingly    
-    transition.select(".x.axis")
-        .call(vtxAxis)
-        .selectAll("g")
-        .delay(delay);
+   
 
    
     transition.select(".x.axis")
