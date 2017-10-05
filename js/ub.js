@@ -174,7 +174,7 @@ d3.csv("data/ub.csv", cast, function(data) {
       //.attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; })
 
    height_diff = 0;  //height discrepancy when calculating h based on data vs y(d.y0) - y(d.y1)
-   rects = gymnast.selectAll("rect")
+   ubrects = gymnast.selectAll("rect.ub")
       .data(function(d) {
         return d.scores; 
       })
@@ -226,22 +226,26 @@ d3.csv("data/ub.csv", cast, function(data) {
   vtchange(maxScoreData);
    
     function vtchange(dataset) {
-      var transition = ubsvg.transition().duration(750),
+      var ubtransition = ubsvg.transition().duration(750),
         delay = function(d, i) { return i * 20; };
-      console.log(dataset);
-      console.log(gymnast);
-      console.log(rects);
+
+       ubx0 = vtx.copy()
        vtx.domain(dataset.map(function(d) { return d.gymnast; })); //might have to initialize this first
       /* transition.select(".x.axis")
         .call(vtxAxis)
         .selectAll("g")
         .delay(delay).call(wrap, vtx.bandwidth()+20)*/;
        gymnast.data(dataset);
-        rects.data(function(d) {
+    ubrects.data(function(d) {
         return d.scores; 
 
-      }).attr("width", vtx.bandwidth()).transition()
-          .duration(1000)
+      }).attr("width", vtx.bandwidth()).attr("x",function(d) { //add to stock code
+          return ubx0(d.mygymnast)
+        }).transition().duration(1000).attr("x",function(d) { //add to stock code
+        
+          return vtx(d.mygymnast)
+        })
+        .transition().duration(1000)
       .attr("y", function(d) {
         /*height_diff = height_diff + vty(d.y0) - vty(d.y1) - (vty(0) - vty(d.value));
         y_corrected = vty(d.y1) + height_diff;
@@ -267,6 +271,16 @@ d3.csv("data/ub.csv", cast, function(data) {
       .style("fill", function(d) { return vtcolor(d.name); })
       .call(vtTip);
         
+
+        var transition = ubsvg.transition().duration(750),
+        delay = function(d, i) { return i * 20; };
+      ubtransition.select(".ub.x.axis")
+        .call(vtxAxis)
+      .selectAll("g")
+        .delay(delay); 
+      
+  
+
 
         vtlegend.append("rect")
       .attr("x", vtwidth - 18)
@@ -487,7 +501,7 @@ d3.csv("data/ub.csv", cast, function(data) {
         .map(function(d,i) { return d.gymnast; }))
         .copy();
 
-    gymnast.selectAll(".class" + active_link)
+    gymnast.selectAll("ub.class" + active_link)
          .sort(function(a, b) { 
             return x0(a.mygymnast) - x0(b.mygymnast); 
           });
@@ -496,7 +510,7 @@ d3.csv("data/ub.csv", cast, function(data) {
         delay = function(d, i) { return i * 20; };
 
     //sort bars
-    transition.selectAll(".class" + active_link)
+    transition.selectAll(".ub.class" + active_link)
       .delay(delay)
       .attr("x", function(d) {      
         return x0(d.mygymnast); 

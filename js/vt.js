@@ -175,12 +175,12 @@ d3.csv("data/vt.csv", cast, function(data) {
   var gymnast = vtsvg.selectAll(".gymnast")
       .data(maxScoreData)
     .enter().append("g")
-      .attr("class", "g")
+      .attr("class", "vt g")
       .attr("transform", function(d) { return "translate(" + "0" + ",0)"; });
       //.attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; })
 
    height_diff = 0;  //height discrepancy when calculating h based on data vs y(d.y0) - y(d.y1)
-   rects = gymnast.selectAll("rect")
+   vtrects = gymnast.selectAll("rect.vt")
       .data(function(d) {
         return d.scores; 
       })
@@ -232,7 +232,7 @@ d3.csv("data/vt.csv", cast, function(data) {
   vtchange(maxScoreData);
    
     function vtchange(dataset) {
-      var transition = vtsvg.transition().duration(750),
+      var vttransition = vtsvg.transition().duration(750),
         delay = function(d, i) { return i * 20; };
 
       //console.log(dataset);
@@ -253,7 +253,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         .selectAll("g")
         .delay(delay);*/
     gymnast.data(dataset);
-    rects.data(function(d) {
+    vtrects.data(function(d) {
         return d.scores; 
 
       }).attr("width", vtx.bandwidth()).attr("x",function(d) { //add to stock code
@@ -293,7 +293,7 @@ d3.csv("data/vt.csv", cast, function(data) {
 
     //sort x-labels accordingly    
    
-    transition.select(".x.axis")
+    vttransition.select(".vt.x.axis")
         .call(vtxAxis)
       .selectAll("g")
         .delay(delay); 
@@ -336,7 +336,7 @@ d3.csv("data/vt.csv", cast, function(data) {
                   .style("opacity", 0.5);
               } else sortBy = i; //save index for sorting in change()
             }
-            console.log("Getting here");
+          
             //enable sort checkbox
             d3.select("#vtlabel").select("#sortvt").property("disabled", false)
             d3.select("#vtlabel").style("color", "black")
@@ -448,8 +448,6 @@ d3.csv("data/vt.csv", cast, function(data) {
     function plotSingle(d) {
       
       class_keep = d.id.split("id").pop();
-      console.log(class_keep);
-      console.log("GETTING HERE??");
       idx = legendClassArray.indexOf(class_keep);  
       //erase all but selected bars by setting opacity to 0
       d3.selectAll(".vt.bars:not(.class" + class_keep + ")")
@@ -515,7 +513,8 @@ d3.csv("data/vt.csv", cast, function(data) {
         .map(function(d,i) { return d.gymnast; }))
         .copy();
 
-    gymnast.selectAll(".class" + active_link)
+    console.log(active_link);
+    gymnast.selectAll(".vt.class" + active_link)
          .sort(function(a, b) { 
             return x0(a.mygymnast) - x0(b.mygymnast); 
           });
