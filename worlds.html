@@ -54,29 +54,54 @@
 						</div>
 
 						<div class="graph" id="allaroundgraph">
-							<label><input class="aaradio" type="radio" name="dataset" id="dataset" value="0" checked> Maximum scores</label>
-							<label><input class="aaradio" type="radio" name="dataset" id="dataset" value="1"> Average Scores    </label>
+							<div class="inputs">
+								<label><input class="aaradio" type="radio" name="dataset" id="dataset" value="0" checked> Maximum scores</label>
+								<label><input class="aaradio" type="radio" name="dataset" id="dataset" value="1"> Average Scores    </label>
+							</div>
 							<svg id="aasvg" width="550" height="550"></svg>
 						</div>
-						<div class="graph" id="vtgraph">
-							 <label id="vtlabel"><input id="sortvt" type="checkbox"> Sort values</label>
-							 <label><input class="vtradio" type="radio" name="dataset" id="dataset" value="0" checked> Maximum scores</label>
-							<label><input class="vtradio" type="radio" name="dataset" id="dataset" value="1"> Average Scores    </label>
-							<!--<svg id="vtsvg" width="800" height="500"></svg>-->
+						<div>
+							<div class="inputs">
+								<label id="vtlabel"><input id="sortvt" type="checkbox"> Sort values</label>
+								<label><input class="vtradio" type="radio" name="vtdataset" id="dataset" value="0" checked> Maximum scores</label>
+								<label><input class="vtradio" type="radio" name="vtdataset" id="dataset" value="1"> Average Scores    </label>
+							</div>
+							<div class="graph" id="vtgraph">
+							</div>
 							<p>Paseka hasn't unveiled her Cheng this season yet</p>
 						</div>
-						<div class="graph" id="ubgraph">
-							<svg id="ubsvg" width="800" height="500"></svg>
+						<div>
+							<div class="inputs">
+								<label id="ublabel"><input id="sortub" type="checkbox"> Sort values</label>
+								<label><input class="ubradio" type="radio" name="ubdataset" id="dataset" value="0" checked> Maximum scores</label>
+								<label><input class="ubradio" type="radio" name="ubdataset" id="dataset" value="1"> Average Scores    </label>
+							</div>
+							<div class="graph" id="ubgraph">
+							</div>
 							<p>Iordache trying really hard to get on ub podium</p>
 						</div>
-						<div class="graph" id="bbgraph">
-							<svg id="bbsvg" width="800" height="500"></svg>
+						<div>
+							<div class="inputs">
+								<label id="bblabel"><input id="sortbb" type="checkbox"> Sort values</label>
+								<label><input class="bbradio" type="radio" name="bbdataset" id="dataset" value="0" checked> Maximum scores</label>
+								<label><input class="bbradio" type="radio" name="bbdataset" id="dataset" value="1"> Average Scores    </label>
+							</div>
+							<div class="graph" id="bbgraph">
+							</div>
+					
 							<p>Liu Tingting doesnt have all her upgrades, neither does MOrgan Hurd
 								ponor going for her first worlds medal
 								 </p>
 						</div>
-						<div class="graph" id="fxgraph">
-							<svg id="fxsvg" width="800" height="500"></svg>
+						<div>
+							<div class="inputs">
+								<label id="fxlabel"><input id="sortfx" type="checkbox"> Sort values</label>
+								<label><input class="fxradio" type="radio" name="fxdataset" id="dataset" value="0" checked> Maximum scores</label>
+								<label><input class="fxradio" type="radio" name="fxdataset" id="dataset" value="1"> Average Scores    </label>
+							</div>
+							<div class="graph" id="fxgraph">
+							</div>
+
 						</div>
 
 
@@ -102,6 +127,11 @@
 		<script src="js/d3.tip.js"></script>
 		<script src="js/aa.js"></script>
 		<script src="js/vt.js"></script>
+		<!--<script src="js/ub.js"></script>-->
+		<!--<script src="js/bb.js"></script>
+		<script src="js/fx.js"></script>-->
+
+
 
 	
   	</body>

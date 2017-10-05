@@ -76,7 +76,6 @@ h5 {
 
 .graph {
 	display: block;
-	margin-top: 30px;
 	text-align: center;
 }
 p {
@@ -218,6 +217,16 @@ pointer-events: none;
   margin: -4px 0 0 -1px;
   top: 50%;
   left: 100%;
+}
+
+label {
+	margin-left: 20px;
+	font-family: 'Avenir Next';
+	
+}
+
+.inputs {
+	
 }
 
 

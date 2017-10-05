@@ -1,5 +1,5 @@
-d3.csv("data/vt.csv", cast, function(data) {
-
+d3.csv("data/ub.csv", cast, function(data) {
+	console.log(data);
   var vtmargin = {top: 100, right: 20, bottom: 30, left: 40},
       vtwidth = 960 - vtmargin.left - vtmargin.right,
       vtheight = 500 - vtmargin.top - vtmargin.bottom;
@@ -19,7 +19,7 @@ d3.csv("data/vt.csv", cast, function(data) {
   var vtyAxis = d3.axisLeft(vty)
       .tickFormat(d3.format(".2s"));
 
-  var vtsvg = d3.select("#vtgraph").append("svg")
+  var ubsvg = d3.select("#ubgraph").append("svg")
       .attr("width", vtwidth + vtmargin.left + vtmargin.right)
       .attr("height", vtheight + vtmargin.top + vtmargin.bottom)
     .append("g")
@@ -34,8 +34,8 @@ d3.csv("data/vt.csv", cast, function(data) {
 
 
   //disable sort checkbox
-  d3.select("#vtlabel")             
-    .select("#sortvt")
+  d3.select("#ublabel")             
+    .select("#sortub")
     .property("disabled", true)
     .property("checked", false); 
 
@@ -44,9 +44,7 @@ d3.csv("data/vt.csv", cast, function(data) {
   		.rollup(function(v) { return {
         country: v[0]['country'],
   			dscore1: d3.max(v, function (d) { return d.dscore1; }),
-        escore1: d3.max(v, function (d) { return d.escore1 - d.nd1; }),
-        dscore2: d3.max(v, function (d) { return d.dscore2; }),
-  			escore2: d3.max(v, function (d) { return d.escore2 - d.nd2; })
+        escore1: d3.max(v, function (d) { return d.escore1 - d.nd1; })
   			};
   		})
   		.entries(data)
@@ -55,9 +53,8 @@ d3.csv("data/vt.csv", cast, function(data) {
           gymnast: group.key,
           country: fixCapitalization(group.value['country']),
           dscore1: +round3(group.value['dscore1']),
-          escore1: +round3(group.value['escore1']),
-          dscore2: +round3(group.value['dscore2']),
-          escore2: +round3(group.value['escore2'])
+          escore1: +round3(group.value['escore1'])
+        
         }
   		});
   
@@ -67,9 +64,7 @@ d3.csv("data/vt.csv", cast, function(data) {
   		.rollup(function(v) { return {
         country: v[0]['country'],
         dscore1: d3.mean(v, function (d) { return d.dscore1; }),
-        escore1: d3.mean(v, function (d) { return d.escore1 - d.nd1; }),
-        dscore2: d3.mean(v, function (d) { return d.dscore2; }),
-        escore2: d3.mean(v, function (d) { return d.escore2 - d.nd2; })
+        escore1: d3.mean(v, function (d) { return d.escore1 - d.nd1; })
   			};
   		})
   		.entries(data)
@@ -78,9 +73,8 @@ d3.csv("data/vt.csv", cast, function(data) {
           gymnast: group.key,
           country: fixCapitalization(group.value['country']),
           dscore1: +round3(group.value['dscore1']),
-          escore1: +round3(group.value['escore1']),
-          dscore2: +round3(group.value['dscore2']),
-          escore2: +round3(group.value['escore2'])
+          escore1: +round3(group.value['escore1'])
+       
         }
       });
 
@@ -135,7 +129,7 @@ d3.csv("data/vt.csv", cast, function(data) {
               .offset([-10, 0])
               .html(function(d,i) { return d.name + " : " + (+round3(d.y1 - d.y0))});
 
-  d3.selectAll(".vtradio")
+  d3.selectAll(".ubradio")
     .on("change", selectDataset); 
 
   //vtchange(maxScoreData);
@@ -145,7 +139,7 @@ d3.csv("data/vt.csv", cast, function(data) {
       vtchange(maxScoreData);
       
     } else {
-      //console.log("getting chosen");
+      console.log("getting chosen");
       vtchange(avgScoreData);
     }
   }
@@ -155,16 +149,16 @@ d3.csv("data/vt.csv", cast, function(data) {
 
     vtx.domain(maxScoreData.map(function(d) { return d.gymnast; }));
   vty.domain([0, d3.max(maxScoreData, function(d) { return d.total; })]);
-  var xaxisg = vtsvg.append("g")
-      .attr("class", "vt x axis")
+  var xaxisg = ubsvg.append("g")
+      .attr("class", "ub x axis")
       .attr("transform", "translate(0," + vtheight + ")")
       .call(vtxAxis)
       .selectAll(".tick text")
-      .call(wrap, vtx.bandwidth());
+      .call(wrap, vtx.bandwidth()+20);
 
 
-  vtsvg.append("g")
-      .attr("class", "vt y axis")
+  ubsvg.append("g")
+      .attr("class", "ub y axis")
       .call(vtyAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
@@ -172,10 +166,10 @@ d3.csv("data/vt.csv", cast, function(data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end");
       //.text("Population");
-  var gymnast = vtsvg.selectAll(".gymnast")
+  var gymnast = ubsvg.selectAll(".gymnast")
       .data(maxScoreData)
     .enter().append("g")
-      .attr("class", "g")
+      .attr("class", "ub gymnast")
       .attr("transform", function(d) { return "translate(" + "0" + ",0)"; });
       //.attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; })
 
@@ -206,7 +200,7 @@ d3.csv("data/vt.csv", cast, function(data) {
       })
       .attr("class", function(d) {        
         classLabel = d.name.replace(/\s/g, ''); //remove spaces
-        return "vt bars class" + classLabel;
+        return "bars ub class" + classLabel;
       })
       .style("fill", function(d) { return vtcolor(d.name); })
       .call(vtTip);
@@ -215,7 +209,7 @@ d3.csv("data/vt.csv", cast, function(data) {
     .on("mouseover", function(d,i) { vtTip.show(d,i,this);}).on("mouseout", function() { vtTip.hide();});
       
 
-  var vtlegend = vtsvg.selectAll(".legend")
+  var vtlegend = ubsvg.selectAll(".legend")
       .data(vtcolor.domain().slice().reverse())
     .enter().append("g")
       .attr("class", function (d) {
@@ -223,7 +217,7 @@ d3.csv("data/vt.csv", cast, function(data) {
         legendClassArray_orig.push(d); //remove spaces
         return "legend";
       })
-      .attr("transform", function(d, i) { return "translate("+ (-330 + i*100) +",-60)"; });
+      .attr("transform", function(d, i) { return "translate("+ (-130 + i*100) +",-60)"; });
 
   //reverse order to match order in which bars are stacked    
   legendClassArray = legendClassArray.reverse();
@@ -232,37 +226,22 @@ d3.csv("data/vt.csv", cast, function(data) {
   vtchange(maxScoreData);
    
     function vtchange(dataset) {
-      var transition = vtsvg.transition().duration(750),
+      var transition = ubsvg.transition().duration(750),
         delay = function(d, i) { return i * 20; };
-
-      //console.log(dataset);
-      //console.log(gymnast);
-      //console.log(rects);
-      vtx0 = vtx.copy()
+      console.log(dataset);
+      console.log(gymnast);
+      console.log(rects);
        vtx.domain(dataset.map(function(d) { return d.gymnast; })); //might have to initialize this first
-      
-
-   
-
-    /*transition.select(".x.axis")
-        .call(vtxAxis)
-      .selectAll("g")
-        .delay(delay); */
-       /*transition.select(".x.axis")
+      /* transition.select(".x.axis")
         .call(vtxAxis)
         .selectAll("g")
-        .delay(delay);*/
-    gymnast.data(dataset);
-    rects.data(function(d) {
+        .delay(delay).call(wrap, vtx.bandwidth()+20)*/;
+       gymnast.data(dataset);
+        rects.data(function(d) {
         return d.scores; 
 
-      }).attr("width", vtx.bandwidth()).attr("x",function(d) { //add to stock code
-          return vtx0(d.mygymnast)
-        }).transition().duration(1000).attr("x",function(d) { //add to stock code
-        
-          return vtx(d.mygymnast)
-        })
-        .transition().duration(1000)
+      }).attr("width", vtx.bandwidth()).transition()
+          .duration(1000)
       .attr("y", function(d) {
         /*height_diff = height_diff + vty(d.y0) - vty(d.y1) - (vty(0) - vty(d.value));
         y_corrected = vty(d.y1) + height_diff;
@@ -272,7 +251,9 @@ d3.csv("data/vt.csv", cast, function(data) {
         return y_corrected;    */
         return vty(d.y1);  //orig, but not accurate  
       })
-      /**/
+      .attr("x",function(d) { //add to stock code
+          return vtx(d.mygymnast)
+        })
       .attr("height", function(d) {       
         return vty(d.y0) - vty(d.y1); //heights calculated based on stacked values (inaccurate)
        //console.log(vty.domain())
@@ -281,24 +262,10 @@ d3.csv("data/vt.csv", cast, function(data) {
       })
       .attr("class", function(d) {        
         classLabel = d.name.replace(/\s/g, ''); //remove spaces
-        return "vt bars class" + classLabel;
+        return "bars ub class" + classLabel;
       })
       .style("fill", function(d) { return vtcolor(d.name); })
       .call(vtTip);
-
-
-
-    //sort bars
-    
-
-    //sort x-labels accordingly    
-   
-    transition.select(".x.axis")
-        .call(vtxAxis)
-      .selectAll("g")
-        .delay(delay); 
-      
-  
         
 
         vtlegend.append("rect")
@@ -320,7 +287,7 @@ d3.csv("data/vt.csv", cast, function(data) {
       })
       .on("click",function(d){        
         if (active_link === "0") { //nothing selected, turn on this selection
-          d3.selectAll(".vtradio")
+          d3.selectAll(".ubradio")
   .property("disabled", true);
           d3.select(this)           
             .style("stroke", "black")
@@ -336,17 +303,17 @@ d3.csv("data/vt.csv", cast, function(data) {
                   .style("opacity", 0.5);
               } else sortBy = i; //save index for sorting in change()
             }
-            console.log("Getting here");
+
             //enable sort checkbox
-            d3.select("#vtlabel").select("#sortvt").property("disabled", false)
-            d3.select("#vtlabel").style("color", "black")
+            d3.select("#ublabel").select("#sortub").property("disabled", false)
+            d3.select("#ublabel").style("color", "black")
             //sort the bars if checkbox is clicked            
-            d3.select("#sortvt").on("change", function() {
+            d3.select("#sortub").on("change", function() {
               changevt(dataset)});  
            
         } else { //deactivate
   
-          //console.log("getting here");
+          console.log("getting here");
           if (active_link === this.id.split("id").pop()) {//active square selected; turn it OFF
             d3.select(this)           
               .style("stroke", "none");
@@ -358,14 +325,14 @@ d3.csv("data/vt.csv", cast, function(data) {
             }
 
             
-            if (d3.select("#vtlabel").select("#sortvt").property("checked")) {              
+            if (d3.select("#ublabel").select("#sortub").property("checked")) {              
               restoreXFlag = true;
             }
             
             //disable sort checkbox
-            d3.select("#vtlabel")
+            d3.select("#ublabel")
               .style("color", "#D8D8D8")
-              .select("#sortvt")
+              .select("#sortub")
               .property("disabled", true)
               .property("checked", false);   
 
@@ -393,13 +360,19 @@ d3.csv("data/vt.csv", cast, function(data) {
          .style("font-family", "Avenir Next")
         .text(function(d) { return d; });
 
-    vtsvg.append('text')
+    ubsvg.append('text')
       .attr("x", vtwidth-30)
       .attr("y", -70)
       .style("text-anchor", "end")
       .style("font-family", "Avenir Next")
       .text("Check a box to filter by that specific score, then sort on that score.")
-  
+    /*vtsvg.append('text')
+      .attr("x", vtwidth-30)
+      .attr("y", -65)
+      .style("text-anchor", "end")
+      .style("font-family", "Avenir Next")
+
+      .text("specific score, then sort those values.")*/
           
           
 
@@ -412,10 +385,10 @@ d3.csv("data/vt.csv", cast, function(data) {
     
     // restore graph after a single selection
     function restorePlot(d) {
-              d3.selectAll(".vtradio")
+              d3.selectAll(".ubradio")
   .property("disabled", false);
       //restore graph after a single selection
-      d3.selectAll(".bars.vt:not(.class" + class_keep + ")")
+      d3.selectAll(".bars.ub:not(.class" + class_keep + ")")
             .transition()
             .duration(1000)
             .delay(function() {
@@ -426,7 +399,7 @@ d3.csv("data/vt.csv", cast, function(data) {
             .style("opacity", 1);
 
       //translate bars back up to original y-posn
-      d3.selectAll(".vt.class" + class_keep)
+      d3.selectAll(".ub.class" + class_keep)
         .attr("x", function(d) { return vtx(d.mygymnast); })
         .transition()
         .duration(1000)
@@ -448,11 +421,10 @@ d3.csv("data/vt.csv", cast, function(data) {
     function plotSingle(d) {
       
       class_keep = d.id.split("id").pop();
-      console.log(class_keep);
-      console.log("GETTING HERE??");
       idx = legendClassArray.indexOf(class_keep);  
+      console.log(class_keep);
       //erase all but selected bars by setting opacity to 0
-      d3.selectAll(".vt.bars:not(.class" + class_keep + ")")
+      d3.selectAll(".bars.ub:not(.class" + class_keep + ")")
             .transition()
             .duration(1000)
             .attr("width", 0) // use because svg has no zindex to hide bars so can't select visible bar underneath
@@ -492,7 +464,7 @@ d3.csv("data/vt.csv", cast, function(data) {
      
 
 
-    if ($('#sortvt').is(":checked")) sortDescending = true;
+    if ($('#sortub').is(":checked")) sortDescending = true;
     else sortDescending = false;
     colName = legendClassArray_orig[sortBy];
     var colName2;
@@ -520,24 +492,29 @@ d3.csv("data/vt.csv", cast, function(data) {
             return x0(a.mygymnast) - x0(b.mygymnast); 
           });
 
-    var transition = vtsvg.transition().duration(750),
+    var transition = ubsvg.transition().duration(750),
         delay = function(d, i) { return i * 20; };
 
     //sort bars
-    transition.selectAll(".vt.bars.class" + active_link)
+    transition.selectAll(".class" + active_link)
       .delay(delay)
       .attr("x", function(d) {      
         return x0(d.mygymnast); 
-      });  
+      });      
 
     //sort x-labels accordingly    
    
-
+    console.log(vtx);
    
-    transition.select(".x.axis")
+    var fixxaxis = transition.select(".ub.x.axis")
         .call(vtxAxis)
-      .selectAll("g")
-        .delay(delay);    
+    	.selectAll(".tick text")
+      //.call(wrap, vtx.bandwidth())
+	/*fixxaxis.selectAll("g")
+        .delay(delay);  */
+
+    /*fixxaxis.selectAll(".tick text")
+      .call(wrap, vtx.bandwidth())  */
   
   }
 
@@ -551,9 +528,6 @@ function cast(d) {
     dscore1: +d.dscore1,
     escore1: +d.escore1, // convert "Length" column to number
     nd1: +d.nd1,
-    dscore2: +d.dscore2,
-    escore2: +d.escore2,
-    nd2: +d.nd2,
     competition: d.competition
   };
 }

@@ -1,4 +1,4 @@
-country,gymnast,dscore,escore,deductions,competition
+country,gymnast,dscore1,escore1,nd1,competition
 RUSSIA,Anastasia Iliankova,6.2,9.075,0,Russian Cup
 RUSSIA,Anastasia Iliankova,5.9,8.3,0,Osijek Challenge Cup
 CHINA,Huan Luo,6.0,7.967,0,Chinese National Games
@@ -40,5 +40,5 @@ HUNGARY,Zsofia Kovacs,5.6,7.466,0,Doha World Cup
 HUNGARY,Zsofia Kovacs,5.8,7.3,0,European Championships
 AUSTRALIA,Rianna Mizzen,6.0,8.5,0,Australian Championships
 AUSTRALIA,Rianna Mizzen,5.6,7.366,0,Doha World Cup
-AUSTRALIA,Rianna Mizzen,6.0,7,600,0,Baku World Cup
+AUSTRALIA,Rianna Mizzen,6.0,7.600,0,Baku World Cup
 AUSTRALIA,Rianna Mizzen,6.0,7.433,0,Melbourne World Cup
