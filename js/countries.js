@@ -30,7 +30,7 @@ countriessvg.append("g")
 countriestip = d3.select("#countriesgraph").append("div")  
         .attr("class", "tooltip")
         .style("left", 275 + "px")    
-        .style("top", 725 + "px");	
+        .style("top", 1950 + "px");	
 
 var projection = d3.geoMercator()
 					.translate([countrieswidth/2, countriesheight/2]);
@@ -125,7 +125,7 @@ function ready(error, countriesdata, gymnastsdata, medalsdata) {
 		})
 		.on("mouseover", function(d) {
 			if (typeof countriesGymnasts[d.properties.name] !== "undefined") {	
-				//console.log("getting here");
+				console.log("getting here");
 				htmlstring = "<h5>" +  d.properties.name + "</h5> <ul>"
 				for (var i = 0; i < countriesGymnasts[d.properties.name].length; i++) {
 					htmlstring += "<li>" + countriesGymnasts[d.properties.name][i] + "</li>"

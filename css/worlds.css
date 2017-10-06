@@ -78,6 +78,10 @@ h5 {
 	display: block;
 	text-align: center;
 }
+
+.graphholder {
+	margin-top: 20px;
+}
 p {
 	font-family: Garamond;
 	font-size: 16px;
