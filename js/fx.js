@@ -1,7 +1,6 @@
 d3.csv("data/fx.csv", cast, function(data) {
-	console.log(data);
   var vtmargin = {top: 100, right: 20, bottom: 30, left: 40},
-      vtwidth = 960 - vtmargin.left - vtmargin.right,
+      vtwidth = 800 - vtmargin.left - vtmargin.right,
       vtheight = 500 - vtmargin.top - vtmargin.bottom;
 
   var vtx = d3.scaleBand()
@@ -122,8 +121,6 @@ d3.csv("data/fx.csv", cast, function(data) {
   //Sort totals in descending order
   maxScoreData.sort(function(a, b) { return b.total - a.total; }); 
   avgScoreData.sort(function(a, b) { return b.total - a.total; }); 
-  console.log(maxScoreData);
-  console.log(avgScoreData);
   var vtTip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-10, 0])
@@ -406,8 +403,7 @@ d3.csv("data/fx.csv", cast, function(data) {
             .transition()
             .duration(1000)
             .delay(function() {
-              if (restoreXFlag) return 3000;
-              else return 750;
+              return 750;
             })
             .attr("width", vtx.bandwidth()) //restore bar width
             .style("opacity", 1);
@@ -418,7 +414,7 @@ d3.csv("data/fx.csv", cast, function(data) {
         .transition()
         .duration(1000)
         .delay(function () {
-          if (restoreXFlag) return 2000; //bars have to be restored to orig posn
+          if (restoreXFlag) return 750; //bars have to be restored to orig posn
           else return 0;
         })
         .attr("y", function(d) {

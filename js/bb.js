@@ -1,7 +1,6 @@
 d3.csv("data/bb.csv", cast, function(data) {
-	console.log(data);
   var vtmargin = {top: 100, right: 20, bottom: 30, left: 40},
-      vtwidth = 960 - vtmargin.left - vtmargin.right,
+      vtwidth = 800 - vtmargin.left - vtmargin.right,
       vtheight = 500 - vtmargin.top - vtmargin.bottom;
 
   var vtx = d3.scaleBand()
@@ -122,8 +121,6 @@ d3.csv("data/bb.csv", cast, function(data) {
   //Sort totals in descending order
   maxScoreData.sort(function(a, b) { return b.total - a.total; }); 
   avgScoreData.sort(function(a, b) { return b.total - a.total; }); 
-  console.log(maxScoreData);
-  console.log(avgScoreData);
   var vtTip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-10, 0])

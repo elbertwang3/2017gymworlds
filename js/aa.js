@@ -1,6 +1,14 @@
 d3.csv("data/aa.csv", cast, function(data) {
 	//console.log(data);
-
+	var maxValueVT = d3.max(data, function(d) {  if (d.vt != 0) {return d.vt;}})
+  	var minValueVT = d3.min(data, function(d) {  if (d.vt != 0) {return d.vt;}})
+  	var maxValueUB = d3.max(data, function(d) {  if (d.vt != 0) {return d.ub;}})
+  	var minValueUB = d3.min(data, function(d) {  if (d.vt != 0) { return d.ub;}})
+  	var maxValueBB = d3.max(data, function(d) {  if (d.vt != 0) { return d.bb;}})
+  	var minValueBB = d3.min(data, function(d) {  if (d.vt != 0) { return d.bb;}})
+  	var maxValueFX = d3.max(data, function(d) {  if (d.vt != 0) { return d.fx;}})
+  	var minValueFX = d3.min(data, function(d) {  if (d.vt != 0) {return d.fx;}})
+  	
 	var maxScoreData = d3.nest()
   		.key(function(d) { return d.gymnast; })
   		.rollup(function(v) { return {
@@ -79,8 +87,12 @@ d3.csv("data/aa.csv", cast, function(data) {
 
   	d3.selectAll(".aaradio")
 		.on("change", selectDataset);
+
+	d3.selectAll(".checkbox")
+		.on("change", selectCheckboxes);
 	
 	
+  	console.log(maxValueVT);
   
   	/*var mycfg = {
   		w: radarwidth,
@@ -101,21 +113,24 @@ d3.csv("data/aa.csv", cast, function(data) {
 		} else {
 			change(avgScoreData);
 		}
-		
+	}
+
+	function selectCheckboxes() {
+		var checkedBoxes = document.querySelectorAll('input[name=gymnast]:checked');
+		console.log(checkedBoxes[0].defaultValue);
+		var checkedValues = []
+		for (var i = 0; i < checkedBoxes.length; i++) {
+			checkedValues.push()
+
+		}
+		console.log(checkedValues);
 	}
 	function change(dataset) {
 		mycfg = generatecfg(dataset);
 		RadarChart.draw("#allaroundgraph", dataset.slice(2,5), mycfg);
 	}
 	function generatecfg(dataset) {
-		var maxValueVT = d3.max(dataset, function(d) {  return d.axes[0].value})
-	  	var minValueVT = d3.min(dataset, function(d) {  return d.axes[0].value})
-	  	var maxValueUB = d3.max(dataset, function(d) {  return d.axes[1].value})
-	  	var minValueUB = d3.min(dataset, function(d) {  return d.axes[1].value})
-	  	var maxValueBB = d3.max(dataset, function(d) {  return d.axes[2].value})
-	  	var minValueBB = d3.min(dataset, function(d) {  return d.axes[2].value})
-	  	var maxValueFX = d3.max(dataset, function(d) {  return d.axes[3].value})
-	  	var minValueFX = d3.min(dataset, function(d) {  return d.axes[3].value})
+		
 	  	/*console.log(maxValueVT);
 	  	console.log(minValueVT);
 	  	console.log(maxValueUB);
@@ -125,7 +140,8 @@ d3.csv("data/aa.csv", cast, function(data) {
 	  	console.log(maxValueFX);
 	  	console.log(minValueFX);*/
 	  	maxValues = [maxValueVT, maxValueUB, maxValueBB, maxValueFX]
-	  	minValues = [minValueVT, minValueUB, minValueBB, minValueFX]
+		minValues = [minValueVT, minValueUB, minValueBB, minValueFX]
+	
 	  	var mycfg = {
 	  		w: radarwidth,
 	  		h: radarheight,
