@@ -38,8 +38,10 @@ var RadarChart = {
     var cfg = Object.create(RadarChart.defaultConfig);
     function setTooltip(tooltip, msg){
       if(msg === false || msg == undefined){
+        console.log("mousing out?");
         tooltip.classed("visible", 0);
         tooltip.select("rect").classed("visible", 0);
+        tooltip.select("rect").style("opacity",0);
       }else{
         tooltip.classed("visible", 1);
 
@@ -58,20 +60,21 @@ var RadarChart = {
         .attr("height", bbox.height + (padding*2))
         .attr("rx","5").attr("ry","5")
         .style("fill", cfg.backgroundTooltipColor).style("opacity", cfg.backgroundTooltipOpacity);
-        tooltip.attr("transform", "translate(" + (coords[0]+10) + "," + (coords[1]-10) + ")")
+        //tooltip.attr("transform", "translate(" + (coords[0]+10) + "," + (coords[1]-10) + ")")
+        tooltip.attr("transform", "translate(0,100)");
       }
     }
     function radar(selection) {
       selection.each(function(data) {
         var container = d3v3.select(this);
-        var tooltip = container.selectAll('g.tooltip').data([data[0]]);
+        var tooltip = container.selectAll('g.tt').data([data[0]]);
 
         var tt = tooltip.enter()
         .append('g')
-        .classed('tooltip', true)
+        .classed('tt', true)
 
-        tt.append('rect').classed("tooltip", true);
-        tt.append('text').classed("tooltip", true);
+        tt.append('rect').classed("tt", true);
+        tt.append('text').classed("tt", true).text( function (d) { return "HELLLOO"});
 
         // allow simple notation
         data = data.map(function(datum) {
@@ -247,6 +250,7 @@ var RadarChart = {
           container.classed('focus', 1);
           d3v3.select(this).classed('focused', 1);
           setTooltip(tooltip, cfg.tooltipFormatClass(dd.className));
+
         })
         .on('mouseout', function(){
           d3v3.event.stopPropagation();
@@ -314,14 +318,14 @@ var RadarChart = {
           .on('mouseover', function(dd){
             d3v3.event.stopPropagation();
             setTooltip(tooltip, cfg.tooltipFormatValue(dd[0].value));
-            //container.classed('focus', 1);
-            //container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 1);
+            container.classed('focus', 1);
+            container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 1);
           })
           .on('mouseout', function(dd){
             d3v3.event.stopPropagation();
             setTooltip(tooltip, false);
             container.classed('focus', 0);
-            //container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 0);
+            container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 0);
             //No idea why previous line breaks tooltip hovering area after hoverin point.
           });
 

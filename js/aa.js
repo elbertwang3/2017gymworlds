@@ -92,7 +92,6 @@ d3.csv("data/aa.csv", cast, function(data) {
 		.on("change", selectCheckboxes);
 	var checkedValues = [];
 	
-  	console.log(maxValueVT);
   
   	/*var mycfg = {
   		w: radarwidth,
@@ -103,11 +102,13 @@ d3.csv("data/aa.csv", cast, function(data) {
 	  	ExtraWidthX: 300
 	  	//color: radarColorScale
 	}*/
-	console.log(maxScoreData[0])
-	console.log(maxScoreData);
 	var dummygymnast = maxScoreData[0]
 	dummygymnast.className = "";
-	var checkedData = [dummygymnast];
+	var checkedData = [];
+	for (var i = 0; i < 14; i++) {
+		checkedData[i] = dummygymnast;
+	}
+	console.log(checkedData);
 	change(checkedData);
 	//RadarChart.draw("#allaroundgraph", maxScoreData, mycfg);
 	function selectDataset() {
@@ -130,10 +131,12 @@ d3.csv("data/aa.csv", cast, function(data) {
 
 		}
 		console.log(checkedValues);
-		checkedData = [dummygymnast];
+		for (var i = 0; i < 14; i++) {
+			checkedData[i] = dummygymnast;
+		}
 		if (value == 0) {
 			for (var i = 0; i < checkedValues.length; i++) {
-				checkedData.push(maxScoreData[checkedValues[i]]);
+				checkedData[checkedValues[i]-1] = maxScoreData[checkedValues[i]];
 			}
 
 		
@@ -141,7 +144,7 @@ d3.csv("data/aa.csv", cast, function(data) {
 			change(checkedData);
 		} else {
 			for (var i = 0; i < checkedValues.length; i++) {
-				checkedData.push(avgScoreData[checkedValues[i]]);
+				checkedData[checkedValues[i]-1] = avgScoreData[checkedValues[i]];
 			}
 			console.log(checkedData);
 			change(checkedData);
