@@ -86,7 +86,7 @@ d3.csv("data/aa.csv", cast, function(data) {
   							.range(["C2CAD6", "#08306b"]);
 
   	d3.selectAll(".aaradio")
-		.on("change", selectDataset);
+		.on("change", selectCheckboxes);
 
 	d3.selectAll(".checkbox")
 		.on("change", selectCheckboxes);
@@ -141,7 +141,7 @@ d3.csv("data/aa.csv", cast, function(data) {
 			change(checkedData);
 		} else {
 			for (var i = 0; i < checkedValues.length; i++) {
-				checkedData.push(maxScoreData[checkedValues[i]]);
+				checkedData.push(avgScoreData[checkedValues[i]]);
 			}
 			console.log(checkedData);
 			change(checkedData);
