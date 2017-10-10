@@ -32,6 +32,7 @@ countriestip = d3.select("#countriesgraph").append("div")
         .style("left", 275 + "px")    
         .style("top", 1950 + "px");	
 
+
 var projection = d3.geoMercator()
 					.translate([countrieswidth/2, countriesheight/2]);
 

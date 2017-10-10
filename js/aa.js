@@ -1,13 +1,18 @@
+
+aatip = d3.select("#allaroundgraph").append("div")  
+        .attr("class", "aa tooltip")
+        .style("left", 400 + "px")    
+        .style("top", 3100 + "px");
 d3.csv("data/aa.csv", cast, function(data) {
 	//console.log(data);
 	var maxValueVT = d3.max(data, function(d) {  if (d.vt != 0) {return d.vt;}})
   	var minValueVT = d3.min(data, function(d) {  if (d.vt != 0) {return d.vt;}})
-  	var maxValueUB = d3.max(data, function(d) {  if (d.vt != 0) {return d.ub;}})
-  	var minValueUB = d3.min(data, function(d) {  if (d.vt != 0) { return d.ub;}})
-  	var maxValueBB = d3.max(data, function(d) {  if (d.vt != 0) { return d.bb;}})
-  	var minValueBB = d3.min(data, function(d) {  if (d.vt != 0) { return d.bb;}})
-  	var maxValueFX = d3.max(data, function(d) {  if (d.vt != 0) { return d.fx;}})
-  	var minValueFX = d3.min(data, function(d) {  if (d.vt != 0) {return d.fx;}})
+  	var maxValueUB = d3.max(data, function(d) {  if (d.ub != 0) {return d.ub;}})
+  	var minValueUB = d3.min(data, function(d) {  if (d.ub != 0) { return d.ub;}})
+  	var maxValueBB = d3.max(data, function(d) {  if (d.bb != 0) { return d.bb;}})
+  	var minValueBB = d3.min(data, function(d) {  if (d.bb != 0) { return d.bb;}})
+  	var maxValueFX = d3.max(data, function(d) {  if (d.fx != 0) { return d.fx;}})
+  	var minValueFX = d3.min(data, function(d) {  if (d.fx != 0) {return d.fx;}})
   	
 	var maxScoreData = d3.nest()
   		.key(function(d) { return d.gymnast; })
@@ -40,9 +45,9 @@ d3.csv("data/aa.csv", cast, function(data) {
   		.key(function(d) { return d.gymnast; })
   		.rollup(function(v) { return {
   			vt: d3.mean(v, function (d) { if (d.vt != 0) { return d.vt; }}),
-  			ub: d3.mean(v, function (d) { return d.ub; }),
-  			bb: d3.mean(v, function (d) { return d.bb; }),
-  			fx: d3.mean(v, function (d) { if (d.vt != 0) { return d.fx; }})
+  			ub: d3.mean(v, function (d) { if (d.ub != 0) return d.ub; }),
+  			bb: d3.mean(v, function (d) { if (d.bb != 0) return d.bb; }),
+  			fx: d3.mean(v, function (d) { if (d.fx != 0) { return d.fx; }})
   			};
   		})
   		.entries(data)
@@ -110,6 +115,10 @@ d3.csv("data/aa.csv", cast, function(data) {
 	}
 	console.log(checkedData);
 	change(checkedData);
+	/*aatip = d3.select("#allaroundgraph").append("div")  
+        .attr("class", "aa tooltip")
+        .style("left", 325 + "px")    
+        .style("top", 3150 + "px");	*/
 	//RadarChart.draw("#allaroundgraph", maxScoreData, mycfg);
 	function selectDataset() {
 		var value = +this.value;

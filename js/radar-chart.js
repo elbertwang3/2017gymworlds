@@ -246,17 +246,36 @@ var RadarChart = {
         polygon.enter().append(polygonType)
         .classed({area: 1, 'd3-enter': 1})
         .on('mouseover', function (dd){
+          console.log(dd);
           d3v3.event.stopPropagation();
           container.classed('focus', 1);
           d3v3.select(this).classed('focused', 1);
-          setTooltip(tooltip, cfg.tooltipFormatClass(dd.className));
+          //setTooltip(tooltip, cfg.tooltipFormatClass(dd.className));
+          htmlstring = "<h5>" +  dd.className + "</h5>"
+          var total = 0;
+          for (var i = 0; i < dd.axes.length; i++) {
+            htmlstring += dd.axes[i]['axis'] + " : " + dd.axes[i]['value'] + "<br>"
+            total += dd.axes[i]['value']
+          }
+          htmlstring += "total: " + round3(total);
+        
+        aatip.html(htmlstring);
+    
+
+    
+        aatip.transition()   
+          .duration(200)     
+                .style("opacity", "1")
 
         })
         .on('mouseout', function(){
           d3v3.event.stopPropagation();
           container.classed('focus', 0);
           d3v3.select(this).classed('focused', 0);
-          setTooltip(tooltip, false);
+          //setTooltip(tooltip, false);
+          aatip.transition()    
+              .duration(200)    
+              .style("opacity", "0"); 
         });
 
         polygon.exit()
@@ -317,13 +336,13 @@ var RadarChart = {
           .classed({circle: 1, 'd3-enter': 1})
           .on('mouseover', function(dd){
             d3v3.event.stopPropagation();
-            setTooltip(tooltip, cfg.tooltipFormatValue(dd[0].value));
+            //setTooltip(tooltip, cfg.tooltipFormatValue(dd[0].value));
             container.classed('focus', 1);
             container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 1);
           })
           .on('mouseout', function(dd){
             d3v3.event.stopPropagation();
-            setTooltip(tooltip, false);
+            //setTooltip(tooltip, false);
             container.classed('focus', 0);
             container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 0);
             //No idea why previous line breaks tooltip hovering area after hoverin point.
